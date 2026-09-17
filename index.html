@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>XV Años · Mariana Claro</title>
+<meta name="description" content="Invitación digital para los XV años de Mariana Claro">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mrs+Saint+Delafield&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<div class="backdrop">
+  <main class="invitation" id="invitation">
+
+    <!-- 1. PORTADA -->
+    <section class="screen active" id="cover" data-screen="cover" aria-label="Portada">
+      <img class="layer" src="assets/Fondo.png" alt="" aria-hidden="true">
+      <div class="content content--cover">
+        <p class="eyebrow">Abrir</p>
+        <button class="envelope-btn" id="openEnvelope" type="button" aria-label="Abrir invitación">
+          <img class="envelope-img" src="assets/ImagenInicio.png" alt="Sobre con sello de cera que dice Abrir, toca para abrir la invitación">
+        </button>
+      </div>
+    </section>
+
+    <!-- 2. PRESENTACIÓN -->
+    <section class="screen" id="presentacion" data-screen="presentacion" aria-label="Presentación">
+      <img class="layer" src="assets/Fondo.png" alt="" aria-hidden="true">
+      <img class="layer" src="assets/Logo.png" alt="XV Años">
+      <button class="back-chevron" data-nav="cover" type="button" aria-label="Volver a portada">‹</button>
+      <div class="content content--presentacion">
+        <p class="script-lg anos-label">Años</p>
+        <h1 class="script-xl name-heading">Mariana Claro</h1>
+        <div class="photo-placeholder photo-placeholder--presentacion" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.5"/><path d="M8 6l1.4-2h5.2L16 6"/></svg>
+          <span>Fotografía de Mariana</span>
+        </div>
+        <button class="next-link" data-nav="mensaje" type="button">Siguiente</button>
+      </div>
+    </section>
+
+    <!-- 3. MENSAJE -->
+    <section class="screen" id="mensaje" data-screen="mensaje" aria-label="Mensaje de la quinceañera">
+      <img class="layer" src="assets/Fondo.png" alt="" aria-hidden="true">
+      <button class="back-chevron" data-nav="presentacion" type="button" aria-label="Volver">‹</button>
+      <div class="content content--text">
+        <p class="message-text">
+          Hoy comienza un nuevo capítulo en mi vida, lleno de sueños e ilusiones que apenas empiezan a florecer.
+          <br><br>
+          Doy gracias a Dios por regalarme estos quince años, y a mi familia por su amor incondicional en cada paso de este camino.
+          <br><br>
+          Será un honor contar con tu presencia para celebrar juntos esta noche tan especial, que guardaré por siempre en mi corazón.
+        </p>
+        <button class="next-link" data-nav="menu" type="button">Siguiente</button>
+      </div>
+    </section>
+
+    <!-- 4. MENÚ PRINCIPAL -->
+    <section class="screen" id="menu" data-screen="menu" aria-label="Menú principal">
+      <img class="layer" src="assets/Fondo.png" alt="" aria-hidden="true">
+      <div class="content content--menu">
+        <h2 class="script-lg menu-title">Menú principal</h2>
+        <nav class="menu-list">
+          <button class="pill" data-nav="fecha" type="button">Fecha</button>
+          <button class="pill" data-nav="misa" type="button">Misa</button>
+          <button class="pill" data-nav="recepcion" type="button">Recepción</button>
+          <button class="pill" data-nav="regalo" type="button">Regalo</button>
+          <button class="pill pill--wide" data-nav="vestimenta" type="button">Código de vestimenta</button>
+          <button class="pill pill--wide" data-nav="confirmar" type="button">Confirmar asistencia</button>
+        </nav>
+      </div>
+    </section>
+
+    <!-- 5. FECHA -->
+    <section class="screen" id="fecha" data-screen="fecha" aria-label="Fecha del evento">
+      <img class="layer" src="assets/Fondo.png" alt="" aria-hidden="true">
+      <button class="back-chevron" data-nav="menu" type="button" aria-label="Volver al menú">‹</button>
+      <div class="content content--text">
+        <p class="message-text message-text--sm">
+          Con la bendición de Dios y el amor de mi familia quiero compartir este momento tan especial
+        </p>
+        <div class="date-block">
+          <p class="script-lg">Sábado</p>
+          <p class="date-big">21 / 11 / 26</p>
+        </div>
+        <button class="next-link" data-nav="cuenta-regresiva" type="button">Siguiente</button>
+      </div>
+    </section>
+
+    <!-- 6. CUENTA REGRESIVA -->
+    <section class="screen" id="cuenta-regresiva" data-screen="cuenta-regresiva" aria-label="Cuenta regresiva">
+      <img class="layer" src="assets/Fondo.png" alt="" aria-hidden="true">
+      <div class="content content--countdown">
+        <p class="script-lg">Faltan</p>
+        <div class="countdown" id="countdown" aria-live="polite">
+          <span id="cd-days">00</span>:<span id="cd-hours">00</span>:<span id="cd-min">00</span>:<span id="cd-sec">00</span>
+        </div>
+        <div class="photo-placeholder photo-placeholder--countdown" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.5"/><path d="M8 6l1.4-2h5.2L16 6"/></svg>
+          <span>Fotografía de Mariana</span>
+        </div>
+      </div>
+      <button class="home-btn" data-nav="menu" type="button" aria-label="Volver al menú principal">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9"/></svg>
+      </button>
+    </section>
+
+    <!-- 7. MISA -->
+    <section class="screen" id="misa" data-screen="misa" aria-label="Misa">
+      <img class="layer" src="assets/Fondo.png" alt="" aria-hidden="true">
+      <div class="content content--info">
+        <h2 class="script-lg">Misa</h2>
+        <p class="time-big">4:00 PM</p>
+        <p class="venue-name">Capilla San Agustín</p>
+        <p class="venue-address">5.ª avenida 23-55, zona 4<br>de Mixco, Condado Naranjo</p>
+        <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Capilla+San+Agustin+5a+avenida+23-55+zona+4+de+Mixco+Condado+Naranjo+Guatemala" target="_blank" rel="noopener">
+          <span class="pin-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 2c-4.4 0-8 3.6-8 8 0 5.4 7 11.5 7.3 11.8.2.1.5.2.7.2s.5-.1.7-.2C13 21.5 20 15.4 20 10c0-4.4-3.6-8-8-8zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+          </span>
+          <span class="pill pill--map">Ver ubicación</span>
+        </a>
+        <div class="photo-frame">
+          <img src="assets/ImagenMisa.png" alt="Fachada de la Capilla San Agustín">
+        </div>
+      </div>
+      <button class="home-btn" data-nav="menu" type="button" aria-label="Volver al menú principal">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9"/></svg>
+      </button>
+    </section>
+
+    <!-- 8. RECEPCIÓN -->
+    <section class="screen" id="recepcion" data-screen="recepcion" aria-label="Recepción">
+      <img class="layer" src="assets/Fondo.png" alt="" aria-hidden="true">
+      <div class="content content--info">
+        <h2 class="script-lg">Recepción</h2>
+        <p class="time-big">6:30 PM</p>
+        <p class="venue-name">Centro Español</p>
+        <p class="venue-address">Calzada Roosevelt Km. 13.5,<br>40-20, zona 7</p>
+        <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Centro+Espa%C3%B1ol+Calzada+Roosevelt+Km+13.5+40-20+zona+7+Guatemala" target="_blank" rel="noopener">
+          <span class="pin-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 2c-4.4 0-8 3.6-8 8 0 5.4 7 11.5 7.3 11.8.2.1.5.2.7.2s.5-.1.7-.2C13 21.5 20 15.4 20 10c0-4.4-3.6-8-8-8zm0 11a3 3 0 1 1 0-6 3 3 0 0 1 0 6z"/></svg>
+          </span>
+          <span class="pill pill--map">Ver ubicación</span>
+        </a>
+        <div class="photo-frame">
+          <img src="assets/ImagenRecepcion.png" alt="Fachada del Centro Español">
+        </div>
+      </div>
+      <button class="home-btn" data-nav="menu" type="button" aria-label="Volver al menú principal">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9"/></svg>
+      </button>
+    </section>
+
+    <!-- 9. REGALO -->
+    <section class="screen" id="regalo" data-screen="regalo" aria-label="Regalo">
+      <img class="layer" src="assets/Fondo.png" alt="" aria-hidden="true">
+      <div class="content content--regalo">
+        <h2 class="script-lg">Regalo</h2>
+        <img class="gift-envelope" src="assets/sobre.png" alt="Sobre decorativo con sello de cera">
+        <p class="message-text message-text--sm">
+          El mejor regalo será contar con tu presencia.
+          <br><br>
+          Si desean tener un detalle conmigo, agradeceré con mucho cariño que sea en efectivo
+        </p>
+      </div>
+      <button class="home-btn" data-nav="menu" type="button" aria-label="Volver al menú principal">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9"/></svg>
+      </button>
+    </section>
+
+    <!-- 10. CÓDIGO DE VESTIMENTA -->
+    <section class="screen" id="vestimenta" data-screen="vestimenta" aria-label="Código de vestimenta">
+      <img class="layer" src="assets/Fondo.png" alt="" aria-hidden="true">
+      <img class="layer layer--icon" src="assets/Traje.png" alt="Ilustración de vestido y traje formal">
+      <div class="content content--vestimenta">
+        <h2 class="script-lg">Código de vestimenta</h2>
+        <p class="formal-label">Formal</p>
+        <p class="message-text message-text--sm">Por favor evitar colores en tonos verdes</p>
+        <div class="swatches" role="img" aria-label="Tonos de verde a evitar">
+          <span class="swatch" style="background:#1f3a24"></span>
+          <span class="swatch" style="background:#2f6b46"></span>
+          <span class="swatch" style="background:#5c9268"></span>
+          <span class="swatch" style="background:#8fb79a"></span>
+        </div>
+      </div>
+      <button class="home-btn" data-nav="menu" type="button" aria-label="Volver al menú principal">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9"/></svg>
+      </button>
+    </section>
+
+    <!-- 11. CONFIRMAR ASISTENCIA -->
+    <section class="screen" id="confirmar" data-screen="confirmar" aria-label="Confirmar asistencia">
+      <img class="layer" src="assets/Fondo.png" alt="" aria-hidden="true">
+      <div class="content content--text">
+        <h2 class="script-lg">Confirmar asistencia</h2>
+        <p class="message-text message-text--sm">
+          Agradeceré confirmar tu asistencia antes del 5 de Noviembre
+        </p>
+        <button class="pill pill--wide" id="openRsvp" type="button">Confirmar aquí</button>
+      </div>
+      <button class="home-btn" data-nav="menu" type="button" aria-label="Volver al menú principal">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9"/></svg>
+      </button>
+    </section>
+
+  </main>
+</div>
+
+<!-- RSVP MODAL -->
+<div class="modal-overlay" id="rsvpOverlay" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="rsvpTitle">
+    <button class="modal-close" id="closeRsvp" type="button" aria-label="Cerrar">×</button>
+    <h3 id="rsvpTitle" class="script-lg">Confirmar asistencia</h3>
+    <form id="rsvpForm">
+      <label>
+        Nombre completo
+        <input type="text" name="nombre" required autocomplete="name">
+      </label>
+      <label>
+        ¿Asistirás?
+        <select name="asistencia" required>
+          <option value="" disabled selected>Selecciona una opción</option>
+          <option value="si">Sí, ahí estaré</option>
+          <option value="no">No podré asistir</option>
+        </select>
+      </label>
+      <label>
+        Número de acompañantes
+        <input type="number" name="acompanantes" min="0" max="10" value="0">
+      </label>
+      <button class="pill pill--wide" type="submit">Enviar confirmación</button>
+    </form>
+    <p class="rsvp-success" id="rsvpSuccess" hidden>¡Gracias por confirmar! Nos vemos pronto. 💚</p>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+</body>
+</html>

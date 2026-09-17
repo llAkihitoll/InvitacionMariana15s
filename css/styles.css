@@ -1,0 +1,387 @@
+:root {
+  --ink: #2f4a34;
+  --ink-soft: #3f5c42;
+  --cream: #f7efe6;
+  --backdrop: #ede1d0;
+  --pill: #b9cfa5;
+  --pill-hover: #a9c290;
+  --pill-ink: #24401f;
+  --shadow: 0 24px 70px rgba(41, 58, 39, 0.35);
+  --script: 'Mrs Saint Delafield', cursive;
+  --serif: 'Cormorant Garamond', Georgia, serif;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--backdrop);
+  font-family: var(--serif);
+  color: var(--ink);
+}
+
+.backdrop {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0px, 3vh, 32px) 0;
+  background:
+    radial-gradient(circle at 50% 0%, rgba(255,255,255,.5), transparent 60%),
+    var(--backdrop);
+}
+
+.invitation {
+  /* Width is derived from whichever constraint (viewport width or viewport
+     height) is tighter, so the 1240:1748 layered assets are always scaled
+     uniformly and never stretched or cropped. */
+  position: relative;
+  width: min(100vw, 640px, calc(94dvh * 1240 / 1748));
+  aspect-ratio: 1240 / 1748;
+  background: var(--cream);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  container-type: inline-size;
+}
+
+@media (max-width: 480px) {
+  .backdrop { padding: 0; }
+}
+
+/* ---------- Screens & layers ---------- */
+
+.screen {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity .45s ease;
+}
+
+.screen.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+  user-select: none;
+}
+
+.layer--icon { object-fit: contain; }
+
+.content {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 9cqw 9cqw 12cqw;
+}
+
+/* ---------- Typography helpers ---------- */
+
+.script-xl { font-family: var(--script); font-size: 11cqw; line-height: 1; margin: 0; color: var(--ink); }
+.script-lg { font-family: var(--script); font-size: 6.2cqw; line-height: 1; margin: 0; color: var(--ink-soft); }
+.eyebrow { font-family: var(--script); font-size: 5cqw; color: var(--ink); margin: 0 0 2cqw; }
+
+.message-text {
+  font-family: var(--script);
+  font-size: 5.6cqw;
+  line-height: 1.5;
+  color: var(--ink-soft);
+  max-width: 46em;
+}
+.message-text--sm { font-size: 4.8cqw; }
+
+/* ---------- Buttons / links ---------- */
+
+.next-link,
+.pill {
+  font-family: var(--script);
+  font-size: 4.6cqw;
+  border: none;
+  cursor: pointer;
+  background: none;
+  color: var(--ink);
+}
+
+.next-link {
+  text-decoration: underline;
+  text-underline-offset: .3em;
+  padding: 1cqw;
+}
+.next-link:hover { color: var(--ink-soft); }
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--pill);
+  color: var(--pill-ink);
+  border-radius: 999px;
+  padding: 2.6cqw 6cqw;
+  min-width: 42cqw;
+  box-shadow: 0 4px 10px rgba(36, 64, 31, 0.18);
+  transition: background .2s ease, transform .15s ease;
+}
+.pill:hover { background: var(--pill-hover); transform: translateY(-1px); }
+.pill--wide { min-width: 64cqw; }
+.pill--map { min-width: 0; padding: 2cqw 5cqw; font-size: 4cqw; }
+
+.back-chevron {
+  position: absolute;
+  top: 4cqw;
+  left: 4cqw;
+  z-index: 3;
+  width: 9cqw;
+  height: 9cqw;
+  min-width: 28px;
+  min-height: 28px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(255,255,255,.55);
+  color: var(--ink);
+  font-size: 5cqw;
+  font-family: var(--serif);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.back-chevron:hover { background: rgba(255,255,255,.8); }
+
+.home-btn {
+  position: absolute;
+  bottom: 5cqw;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 3;
+  width: 12cqw;
+  height: 12cqw;
+  min-width: 44px;
+  min-height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: var(--ink-soft);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 6px 16px rgba(0,0,0,.25);
+}
+.home-btn:hover { background: var(--ink); }
+.home-btn svg { width: 40%; height: 40%; }
+
+/* ---------- Cover ---------- */
+
+.content--cover {
+  justify-content: center;
+  gap: 3cqw;
+  padding-bottom: 9cqw;
+}
+.envelope-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  width: 78cqw;
+  animation: floatSeal 3.5s ease-in-out infinite;
+}
+.envelope-img { width: 100%; display: block; filter: drop-shadow(0 18px 30px rgba(0,0,0,.25)); }
+@keyframes floatSeal {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-2%); }
+}
+
+.screen.leaving .envelope-btn { animation: none; transform: scale(1.08); opacity: 0; transition: opacity .5s ease, transform .5s ease; }
+
+/* ---------- Presentación ---------- */
+
+.content--presentacion {
+  /* padding-top clears the XV graphic baked into Logo.png (occupies
+     ~24.7%-46.2% of the card height, i.e. ~35-65cqw once converted
+     to the card's fixed 1240:1748 ratio). */
+  justify-content: flex-start;
+  padding-top: 67cqw;
+  gap: 2cqw;
+}
+.anos-label { position: absolute; top: 44cqw; left: 65cqw; transform: translateX(-50%); font-size: 5.6cqw; color: var(--ink); z-index: 2; }
+.name-heading { font-size: 8.5cqw; color: var(--ink); }
+.content--presentacion .next-link { margin-top: 1cqw; }
+
+/* ---------- Generic text screens (mensaje / fecha / confirmar) ---------- */
+
+.content--text {
+  justify-content: center;
+  gap: 6cqw;
+}
+
+/* ---------- Menú ---------- */
+
+.content--menu { justify-content: flex-start; padding-top: 12cqw; gap: 6cqw; }
+.menu-title { margin-bottom: 2cqw; }
+.menu-list { display: flex; flex-direction: column; gap: 3.2cqw; align-items: center; width: 100%; }
+
+/* ---------- Fecha ---------- */
+
+.date-block { display: flex; flex-direction: column; gap: 1cqw; }
+.date-big { font-family: var(--script); font-size: 9cqw; color: var(--ink); margin: 0; }
+
+/* ---------- Cuenta regresiva ---------- */
+
+.content--countdown {
+  justify-content: flex-start;
+  padding-top: 10cqw;
+  gap: 3cqw;
+}
+.countdown {
+  font-family: var(--script);
+  font-size: 8cqw;
+  color: var(--ink);
+  letter-spacing: .02em;
+}
+
+/* ---------- Misa / Recepción ---------- */
+
+.content--info { justify-content: flex-start; padding-top: 8cqw; gap: 2.5cqw; }
+.time-big { font-family: var(--script); font-size: 6cqw; color: var(--ink); margin: 0; }
+.venue-name { font-family: var(--script); font-size: 6cqw; color: var(--ink-soft); margin: 2cqw 0 0; }
+.venue-address { font-family: var(--script); font-size: 4.6cqw; color: var(--ink-soft); line-height: 1.4; margin: 0; }
+.map-link { display: flex; flex-direction: column; align-items: center; gap: 1.5cqw; text-decoration: none; margin-top: 1cqw; }
+.pin-icon { color: var(--ink-soft); }
+.photo-frame {
+  margin-top: 3cqw;
+  width: 44cqw;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 10px 24px rgba(0,0,0,.25);
+  border: 3px solid #fff;
+}
+.photo-frame img { width: 100%; display: block; }
+
+/* ---------- Photo placeholder ----------
+   Reusable slot for photos not yet supplied. Swap by replacing this
+   element with a <div class="photo-frame"><img src="..."></div> once a
+   real photo of Mariana is available. */
+
+.photo-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.6cqw;
+  width: 34cqw;
+  aspect-ratio: 4 / 5;
+  border: 1.5px dashed var(--ink-soft);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.4);
+  color: var(--ink-soft);
+  opacity: .75;
+  padding: 3cqw;
+  text-align: center;
+}
+.photo-placeholder svg { opacity: .7; }
+.photo-placeholder span {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 3.1cqw;
+  line-height: 1.3;
+}
+.photo-placeholder--countdown { width: 46cqw; }
+
+/* ---------- Regalo ---------- */
+
+.content--regalo { justify-content: flex-start; padding-top: 6cqw; gap: 3cqw; }
+.gift-envelope { width: 46cqw; filter: drop-shadow(0 14px 24px rgba(0,0,0,.2)); }
+
+/* ---------- Vestimenta ---------- */
+
+/* padding-top clears the dress/suit sketch in Traje.png (~14.6%-35.5% of
+   card height, i.e. ~21-50cqw once converted to the card's ratio). */
+.content--vestimenta { justify-content: flex-start; padding-top: 52cqw; gap: 2.5cqw; }
+.formal-label { font-family: var(--script); font-size: 7cqw; color: var(--ink); margin: 0; }
+.swatches { display: flex; gap: 3cqw; margin-top: 2cqw; }
+.swatch {
+  width: 10cqw; height: 10cqw; min-width: 34px; min-height: 34px;
+  border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,.2); border: 2px solid #fff;
+}
+
+/* ---------- RSVP Modal ---------- */
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(30, 40, 30, .55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 20px;
+}
+.modal-overlay[hidden] { display: none; }
+.modal {
+  position: relative;
+  background: var(--cream);
+  border-radius: 10px;
+  padding: 32px 28px;
+  max-width: 380px;
+  width: 100%;
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  background: none;
+  border: none;
+  font-size: 26px;
+  line-height: 1;
+  color: var(--ink);
+  cursor: pointer;
+}
+.modal h3 { font-size: 2.4rem; margin: 0 0 18px; }
+.modal form { display: flex; flex-direction: column; gap: 14px; text-align: left; }
+.modal label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: var(--serif);
+  font-size: .95rem;
+  color: var(--ink-soft);
+}
+.modal input, .modal select {
+  font-family: var(--serif);
+  font-size: 1rem;
+  padding: 8px 10px;
+  border: 1px solid #c9bfa8;
+  border-radius: 6px;
+  background: #fff;
+  color: var(--ink);
+}
+.modal .pill { margin-top: 6px; font-size: 1.1rem; width: 100%; }
+.rsvp-success {
+  font-family: var(--script);
+  font-size: 1.6rem;
+  color: var(--ink-soft);
+  margin: 16px 0 0;
+}
+
+@media (min-width: 700px) {
+  .modal h3 { font-size: 2rem; }
+}
