@@ -123,6 +123,14 @@ html, body {
    drifting to the vertical middle of a taller phone screen. */
 .layer--icon { object-fit: contain; object-position: center top; }
 
+/* EsquinasFlorales.png's own artwork stops ~7.2% short of the canvas's
+   true bottom edge. The inner frame's sides now run down to meet the
+   outer frame's bottom line at a 1.3% inset (see .frame-border--outer
+   below) rather than the true edge, so the flowers are nudged down just
+   enough (7.2% - 1.3%) to sit flush with THAT line instead of the very
+   edge of the screen. */
+.layer--flowers { transform: translateY(5.9%); z-index: 2; }
+
 .content {
   position: relative;
   z-index: 2;
@@ -183,6 +191,28 @@ html, body {
 .pill:hover { background: var(--pill-hover); transform: translateY(-1px); }
 .pill--wide { min-width: 64cqw; }
 .pill--map { min-width: 0; padding: 2cqw 5cqw; font-size: 4cqw; }
+
+/* Menú principal / Ver ubicación: plain underlined text instead of a
+   filled pill, matching the "Siguiente" link style used elsewhere.
+   "Confirmar aquí" and "Enviar confirmación" keep the filled pill look —
+   those stay real call-to-action buttons. */
+.menu-list .pill,
+.pill--map {
+  background: none;
+  box-shadow: none;
+  border-radius: 0;
+  min-width: 0;
+  color: var(--ink);
+  text-decoration: underline;
+  text-underline-offset: .3em;
+  padding: 1.5cqw 2cqw;
+}
+.menu-list .pill:hover,
+.pill--map:hover {
+  background: none;
+  transform: none;
+  color: var(--ink-soft);
+}
 
 .back-chevron {
   position: absolute;
