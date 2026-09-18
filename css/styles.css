@@ -23,14 +23,38 @@ html, body {
 }
 
 .backdrop {
+  position: relative;
   min-height: 100dvh;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: clamp(0px, 3vh, 32px) 0;
-  background:
-    radial-gradient(circle at 50% 0%, rgba(255,255,255,.5), transparent 60%),
-    var(--backdrop);
+  background: var(--backdrop);
+  overflow: hidden;
+  isolation: isolate;
+}
+
+/* On phones the card can't fill the screen top-to-bottom without either
+   distorting or cropping the 1240:1748 layered assets (see .invitation
+   below), so instead of a flat-color gap, this fills the space behind it
+   with a softly blurred, zoomed-in sample of Fondo.png — the same marble,
+   just diffused, so it reads as a continuation of the card rather than a
+   cut-off edge. */
+.backdrop::before {
+  content: "";
+  position: fixed;
+  inset: -60px;
+  background: url('../assets/Fondo.png') center 35% / 260% no-repeat;
+  filter: blur(48px) saturate(1.05);
+  transform: scale(1.08);
+  z-index: 0;
+}
+.backdrop::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at 50% 0%, rgba(255,255,255,.35), transparent 60%);
+  z-index: 0;
 }
 
 .invitation {
@@ -38,6 +62,7 @@ html, body {
      height) is tighter, so the 1240:1748 layered assets are always scaled
      uniformly and never stretched or cropped. */
   position: relative;
+  z-index: 1;
   width: min(100vw, 640px, calc(94dvh * 1240 / 1748));
   aspect-ratio: 1240 / 1748;
   background: var(--cream);
@@ -47,8 +72,18 @@ html, body {
   container-type: inline-size;
 }
 
-@media (max-width: 480px) {
+/* Phones: true edge-to-edge. The card fills the exact viewport instead of
+   being derived from the 1240:1748 ratio, so backgrounds (object-fit:
+   cover, below) crop their sides slightly rather than leaving a gap. */
+@media (max-width: 640px) {
   .backdrop { padding: 0; }
+  .invitation {
+    width: 100vw;
+    height: 100dvh;
+    aspect-ratio: auto;
+    border-radius: 0;
+    box-shadow: none;
+  }
 }
 
 /* ---------- Screens & layers ---------- */
@@ -73,12 +108,20 @@ html, body {
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: fill;
+  /* cover: on phones (where the card no longer matches the asset's
+     1240:1748 ratio, see .invitation above) this crops the sides rather
+     than leaving a gap — fine for the marble/border background. On
+     desktop the card ratio always matches exactly, so cover is a no-op. */
+  object-fit: cover;
   pointer-events: none;
   user-select: none;
 }
 
-.layer--icon { object-fit: contain; }
+/* Logo.png / Traje.png: small graphics with text/linework close to their
+   own edges — never crop these. contain scales them down instead, and
+   center-top keeps them pinned where the design expects them instead of
+   drifting to the vertical middle of a taller phone screen. */
+.layer--icon { object-fit: contain; object-position: center top; }
 
 .content {
   position: relative;
@@ -384,4 +427,21 @@ html, body {
 
 @media (min-width: 700px) {
   .modal h3 { font-size: 2rem; }
+}
+
+/* On phones the card is now taller than the 1240:1748 design height (it
+   fills the exact screen instead of the derived aspect-ratio box — see
+   the .invitation and .backdrop rules above), so screens that pinned
+   their content to the top (flex-start) leave a large empty gap above
+   the flowers. Centering distributes that extra room evenly instead.
+   Presentación/Vestimenta keep flex-start since their padding-top is
+   anchored to a fixed-position graphic (the XV logo / dress icon)
+   rather than to empty space. */
+@media (max-width: 640px) {
+  .content--menu,
+  .content--countdown,
+  .content--info,
+  .content--regalo {
+    justify-content: center;
+  }
 }
