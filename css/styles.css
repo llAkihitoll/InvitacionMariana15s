@@ -379,8 +379,20 @@ html, body {
 
 /* ---------- Regalo ---------- */
 
-.content--regalo { justify-content: flex-start; padding-top: 6cqw; gap: 3cqw; }
-.gift-envelope { width: 46cqw; filter: drop-shadow(0 14px 24px rgba(0,0,0,.2)); }
+/* sobre.png is a full 1240x1748 canvas with the envelope occupying only
+   the middle portion (transparent margin above/below) — at this font
+   size the title + full-height image + paragraphs don't all fit with
+   the standard .content padding, so this screen gets tighter padding
+   and gaps instead of cropping the image. */
+.content--regalo {
+  justify-content: center;
+  gap: 2.5cqw;
+  padding-top: 5cqw;
+  /* extra padding-bottom reserves room for .home-btn (bottom:5cqw +
+     height:12cqw) so the centered block never lands underneath it */
+  padding-bottom: 20cqw;
+}
+.gift-envelope { width: 31cqw; filter: drop-shadow(0 14px 24px rgba(0,0,0,.2)); }
 
 /* ---------- Vestimenta ---------- */
 
@@ -470,8 +482,7 @@ html, body {
 @media (max-width: 640px) {
   .content--menu,
   .content--countdown,
-  .content--info,
-  .content--regalo {
+  .content--info {
     justify-content: center;
   }
 }
@@ -498,9 +509,8 @@ html, body {
    this line sits right where the text/buttons actually start instead of
    at an arbitrary percentage. */
 .frame-border--inner {
-  inset: 9cqw 9cqw 1.3% 9cqw;
+  inset: 9cqw;
   border-width: 1.5px;
-  border-bottom-width: 0;
 }
 
 /* ---------- Larger text: Menú, Fecha, Misa, Recepción, Regalo,
