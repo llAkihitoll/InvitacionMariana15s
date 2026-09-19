@@ -379,25 +379,19 @@ html, body {
 
 /* ---------- Regalo ---------- */
 
-/* The envelope grows to fill whatever space is left between the title
-   and the paragraphs (flex-grow), instead of a fixed size — so it's as
-   big as the available room allows on every screen (a lot of room on
-   phones, less on the fixed-ratio desktop card) without ever pushing
-   the text off the card. object-fit: contain keeps sobre.png's full,
-   uncropped, undistorted proportions inside whatever box it grows to. */
+/* A fixed, moderate size (not flex-grow to fill all leftover space) —
+   on phones there's enough spare room that growing to fill it made the
+   envelope dominate the screen over the message text. */
 .content--regalo {
   justify-content: flex-start;
   gap: 2.5cqw;
-  padding-top: 9cqw;
+  padding-top: 12cqw;
   /* extra padding-bottom reserves room for .home-btn (bottom:5cqw +
      height:12cqw) so the paragraph text never lands underneath it */
   padding-bottom: 20cqw;
 }
 .gift-envelope {
-  flex: 1 1 0;
-  min-height: 0;
-  width: 100%;
-  object-fit: contain;
+  width: 50cqw;
   filter: drop-shadow(0 14px 24px rgba(0,0,0,.2));
 }
 
