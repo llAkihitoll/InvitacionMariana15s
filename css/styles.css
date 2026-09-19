@@ -2,7 +2,7 @@
   --ink: #2f4a34;
   --ink-soft: #3f5c42;
   --cream: #f7efe6;
-  --backdrop: #ede1d0;
+  --backdrop: #ffffff;
   --pill: #b9cfa5;
   --pill-hover: #a9c290;
   --pill-ink: #24401f;
@@ -34,28 +34,10 @@ html, body {
   isolation: isolate;
 }
 
-/* On phones the card can't fill the screen top-to-bottom without either
-   distorting or cropping the 1240:1748 layered assets (see .invitation
-   below), so instead of a flat-color gap, this fills the space behind it
-   with a softly blurred, zoomed-in sample of Fondo.png — the same marble,
-   just diffused, so it reads as a continuation of the card rather than a
-   cut-off edge. */
-.backdrop::before {
-  content: "";
-  position: fixed;
-  inset: -60px;
-  background: url('../assets/Fondo.png') center 35% / 260% no-repeat;
-  filter: blur(48px) saturate(1.05);
-  transform: scale(1.08);
-  z-index: 0;
-}
-.backdrop::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background: radial-gradient(circle at 50% 0%, rgba(255,255,255,.35), transparent 60%);
-  z-index: 0;
-}
+/* On phones the card is always full-bleed (100vw/100dvh, see .invitation
+   below), so it fully covers this area regardless — nothing below is
+   ever visible there. On desktop the card is letterboxed, leaving this
+   plain white surround visible around it. */
 
 .invitation {
   /* Width is derived from whichever constraint (viewport width or viewport
@@ -262,20 +244,71 @@ html, body {
 
 /* ---------- Cover ---------- */
 
+/* No Fondo.png/flowers on this screen — just the envelope on a plain
+   white card, so #cover needs its own white background (the card's own
+   background, .invitation, is cream). */
+/* .frame-border divs are shared/global (siblings after every .screen in
+   the markup), so hide them specifically while #cover is the active
+   screen instead of touching the shared rule. */
+#cover.active ~ .frame-border { display: none; }
+#cover { background: #fff; }
+
 .content--cover {
   justify-content: center;
   gap: 3cqw;
   padding-bottom: 9cqw;
 }
 .envelope-btn {
+  position: relative;
+  display: block;
   background: none;
   border: none;
   padding: 0;
   cursor: pointer;
   width: 78cqw;
+  aspect-ratio: 1240 / 1748;
   animation: floatSeal 3.5s ease-in-out infinite;
 }
-.envelope-img { width: 100%; display: block; filter: drop-shadow(0 18px 30px rgba(0,0,0,.25)); }
+.envelope-btn.opened { animation: none; }
+
+/* Closed (ImagenInicio.png) and open (ImagenInicio2.png) envelopes are
+   stacked exactly on top of each other and crossfade on click — one tap
+   opens the envelope AND reveals the card photo below, no second click. */
+.envelope-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 18px 30px rgba(0,0,0,.25));
+  transition: opacity .6s ease;
+}
+.envelope-img--closed { opacity: 1; }
+.envelope-img--open { opacity: 0; }
+.envelope-btn.opened .envelope-img--closed { opacity: 0; }
+.envelope-btn.opened .envelope-img--open { opacity: 1; }
+
+/* Positioned to match the blank "card" window inside ImagenInicio2.png
+   (measured directly on the asset: ~17.7%-81.5% of its width,
+   ~27.5%-49.5% of its height). .photo-placeholder.envelope-card-photo
+   (two classes) beats the plain .photo-placeholder rule regardless of
+   source order, so these overrides always win. */
+.photo-placeholder.envelope-card-photo {
+  position: absolute;
+  left: 17.7%;
+  top: 27.5%;
+  width: 63.8%;
+  height: 22%;
+  aspect-ratio: auto;
+  padding: 1.2cqw;
+  gap: 0.8cqw;
+  opacity: 0;
+  transition: opacity .6s ease .15s;
+}
+.envelope-card-photo span { font-size: 2.4cqw; }
+.envelope-btn.opened .envelope-card-photo { opacity: .85; }
+
 @keyframes floatSeal {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-2%); }

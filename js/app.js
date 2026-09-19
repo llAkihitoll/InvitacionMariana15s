@@ -38,15 +38,23 @@
   showScreen(screenIds.includes(initial) ? initial : DEFAULT_SCREEN, { pushHistory: false });
 
   // ---------- Envelope open animation ----------
+  // One click: crossfade closed -> open envelope (revealing the card
+  // photo), hold briefly so it's actually seen, then fade out and move
+  // on to Presentación. No second click required.
   const openEnvelopeBtn = document.getElementById('openEnvelope');
   if (openEnvelopeBtn) {
     openEnvelopeBtn.addEventListener('click', () => {
+      if (openEnvelopeBtn.classList.contains('opened')) return;
       const coverScreen = document.getElementById('cover');
-      coverScreen.classList.add('leaving');
+      openEnvelopeBtn.classList.add('opened');
       window.setTimeout(() => {
-        navigate('presentacion');
-        coverScreen.classList.remove('leaving');
-      }, 480);
+        coverScreen.classList.add('leaving');
+        window.setTimeout(() => {
+          navigate('presentacion');
+          coverScreen.classList.remove('leaving');
+          openEnvelopeBtn.classList.remove('opened');
+        }, 480);
+      }, 1100);
     });
   }
 

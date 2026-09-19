@@ -19,12 +19,16 @@
 
     <!-- 1. PORTADA -->
     <section class="screen active" id="cover" data-screen="cover" aria-label="Portada">
-      <img class="layer" src="assets/Fondo.png" alt="" aria-hidden="true">
-      <img class="layer layer--flowers" src="assets/EsquinasFlorales.png" alt="" aria-hidden="true">
       <div class="content content--cover">
-        <p class="eyebrow">Abrir</p>
         <button class="envelope-btn" id="openEnvelope" type="button" aria-label="Abrir invitación">
-          <img class="envelope-img" src="assets/ImagenInicio.png" alt="Sobre con sello de cera que dice Abrir, toca para abrir la invitación">
+          <img class="envelope-img envelope-img--closed" src="assets/ImagenInicio.png" alt="Sobre con sello de cera que dice Abrir, toca para abrir la invitación">
+          <img class="envelope-img envelope-img--open" src="assets/ImagenInicio2.png" alt="Sobre abierto">
+          <!-- Placeholder de la foto que se asoma en la "tarjeta" del sobre abierto.
+               Reemplazar por <img src="assets/TU_FOTO.png"> cuando tengas la fotografía. -->
+          <div class="envelope-card-photo photo-placeholder" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3" y="6" width="18" height="14" rx="2"/><circle cx="12" cy="13" r="3.5"/><path d="M8 6l1.4-2h5.2L16 6"/></svg>
+            <span>Fotografía de Mariana</span>
+          </div>
         </button>
       </div>
     </section>
@@ -65,6 +69,7 @@
     <section class="screen" id="menu" data-screen="menu" aria-label="Menú principal">
       <img class="layer" src="assets/Fondo.png" alt="" aria-hidden="true">
       <img class="layer layer--flowers" src="assets/EsquinasFlorales.png" alt="" aria-hidden="true">
+      <button class="back-chevron" data-nav="mensaje" type="button" aria-label="Volver">‹</button>
       <div class="content content--menu">
         <h2 class="script-lg menu-title">Menú principal</h2>
         <nav class="menu-list">
