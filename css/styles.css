@@ -54,6 +54,13 @@ html, body {
   container-type: inline-size;
 }
 
+/* Portada: no card shape at all — just the envelope floating on the
+   plain white backdrop, so there's nothing visible before/behind it. */
+.invitation:has(#cover.active) {
+  box-shadow: none;
+  border-radius: 0;
+}
+
 /* Phones: true edge-to-edge. The card fills the exact viewport instead of
    being derived from the 1240:1748 ratio, so backgrounds (object-fit:
    cover, below) crop their sides slightly rather than leaving a gap. */
@@ -290,16 +297,17 @@ html, body {
 .envelope-btn.opened .envelope-img--open { opacity: 1; }
 
 /* Positioned to match the blank "card" window inside ImagenInicio2.png
-   (measured directly on the asset: ~17.7%-81.5% of its width,
-   ~27.5%-49.5% of its height). .photo-placeholder.envelope-card-photo
-   (two classes) beats the plain .photo-placeholder rule regardless of
-   source order, so these overrides always win. */
+   (re-measured after the asset was replaced with a transparent-background
+   version: ~20.5%-78.2% of its width, ~27%-49.9% of its height).
+   .photo-placeholder.envelope-card-photo (two classes) beats the plain
+   .photo-placeholder rule regardless of source order, so these
+   overrides always win. */
 .photo-placeholder.envelope-card-photo {
   position: absolute;
-  left: 17.7%;
-  top: 27.5%;
-  width: 63.8%;
-  height: 22%;
+  left: 20.5%;
+  top: 27%;
+  width: 57.7%;
+  height: 22.9%;
   aspect-ratio: auto;
   padding: 1.2cqw;
   gap: 0.8cqw;
