@@ -188,7 +188,7 @@
       <div class="content content--vestimenta">
         <h2 class="script-lg">Código de vestimenta</h2>
         <p class="formal-label">Formal</p>
-        <p class="message-text message-text--sm">Por favor evitar colores en tonos verdes</p>
+        <p class="message-text message-text--sm">Por favor <strong>evitar</strong> colores en tonos verdes</p>
         <div class="swatches" role="img" aria-label="Tonos de verde a evitar">
           <span class="swatch" style="background:#1f3a24"></span>
           <span class="swatch" style="background:#2f6b46"></span>
@@ -208,9 +208,10 @@
       <div class="content content--text">
         <h2 class="script-lg">Confirmar asistencia</h2>
         <p class="message-text message-text--sm">
-          Agradeceré confirmar tu asistencia antes del 5 de Noviembre
+          Agradeceré confirmar tu asistencia antes del <strong>5 de Noviembre</strong>
         </p>
-        <button class="pill pill--wide" id="openRsvp" type="button">Confirmar aquí</button>
+        <!-- TODO: reemplazar el "#" de abajo por el enlace a tu formulario de confirmación -->
+        <a class="next-link" href="https://forms.gle/ZVnqVMVkfgXFJGXC6" target="_blank" rel="noopener">Confirmar aquí</a>
       </div>
       <button class="home-btn" data-nav="menu" type="button" aria-label="Volver al menú principal">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v9a1 1 0 0 0 1 1h4v-6h4v6h4a1 1 0 0 0 1-1v-9"/></svg>
@@ -223,7 +224,9 @@
   </main>
 </div>
 
-<!-- RSVP MODAL -->
+<!-- RSVP MODAL — desactivado: "Confirmar aquí" ahora enlaza directo a un
+     formulario externo (ver TODO en la sección 11 arriba). Se deja este
+     bloque comentado por si se quiere volver a usar el formulario propio.
 <div class="modal-overlay" id="rsvpOverlay" hidden>
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="rsvpTitle">
     <button class="modal-close" id="closeRsvp" type="button" aria-label="Cerrar">×</button>
@@ -250,6 +253,8 @@
     <p class="rsvp-success" id="rsvpSuccess" hidden>¡Gracias por confirmar! Nos vemos pronto. 💚</p>
   </div>
 </div>
+-->
+
 
 <script src="js/app.js"></script>
 </body>

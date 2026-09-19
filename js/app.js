@@ -87,6 +87,12 @@
   setInterval(updateCountdown, 1000);
 
   // ---------- RSVP modal ----------
+  // Desactivado: "Confirmar aquí" ahora es un enlace directo a un
+  // formulario externo (ver el TODO junto a ese enlace en index.html), y
+  // el <div id="rsvpOverlay"> que este bloque controlaba está comentado
+  // en el HTML. Se deja el código aquí, comentado, por si se quiere
+  // volver a usar el formulario propio.
+  /*
   const rsvpOverlay = document.getElementById('rsvpOverlay');
   const openRsvpBtn = document.getElementById('openRsvp');
   const closeRsvpBtn = document.getElementById('closeRsvp');
@@ -127,4 +133,5 @@
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && rsvpOverlay && !rsvpOverlay.hidden) closeRsvp();
   });
+  */
 })();

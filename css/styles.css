@@ -533,7 +533,7 @@ html, body {
 
 #menu .menu-list .pill,
 #fecha .next-link,
-#confirmar .pill--wide {
+#confirmar .next-link {
   font-size: 6cqw;
 }
 
