@@ -354,9 +354,14 @@ html, body {
 /* Mensaje's three paragraphs are the longest text block in the site —
    at the base size they could crowd the top border / bottom flowers on
    shorter desktop windows. Scoped to #mensaje so Fecha/Confirmar (which
-   use the shorter message-text--sm variant) are unaffected. */
-#mensaje .content--text { gap: 4.5cqw; }
-#mensaje .message-text { font-size: 4.7cqw; line-height: 1.35; }
+   use the shorter message-text--sm variant) are unaffected. Desktop
+   only (min-width:641px) — on phones the full-bleed card already has
+   plenty of room, and older guests with limited vision need the
+   original, larger size there. */
+@media (min-width: 641px) {
+  #mensaje .content--text { gap: 4.5cqw; }
+  #mensaje .message-text { font-size: 4.7cqw; line-height: 1.35; }
+}
 
 /* ---------- Menú ---------- */
 
