@@ -112,6 +112,11 @@ html, body {
    drifting to the vertical middle of a taller phone screen. */
 .layer--icon { object-fit: contain; object-position: center top; }
 
+/* Shrinks the dress/suit sketch a bit, anchored to the top so it stays
+   pinned under the frame instead of drifting — frees up room below for
+   the swatches to clear .home-btn without crowding it. */
+.layer--traje { transform: scale(0.85); transform-origin: center top; }
+
 /* EsquinasFlorales.png's own artwork stops ~7.2% short of the canvas's
    true bottom edge. The inner frame's sides now run down to meet the
    outer frame's bottom line at a 1.3% inset (see .frame-border--outer
@@ -329,8 +334,9 @@ html, body {
 .content--presentacion {
   /* padding-top clears the XV graphic baked into Logo.png (occupies
      ~24.7%-46.2% of the card height, i.e. ~35-65cqw once converted
-     to the card's fixed 1240:1748 ratio). */
-  justify-content: flex-start;
+     to the card's fixed 1240:1748 ratio); centering then distributes the
+     remaining space evenly around the text below it. */
+  justify-content: center;
   padding-top: 67cqw;
   gap: 2cqw;
 }
@@ -345,9 +351,16 @@ html, body {
   gap: 6cqw;
 }
 
+/* Mensaje's three paragraphs are the longest text block in the site —
+   at the base size they could crowd the top border / bottom flowers on
+   shorter desktop windows. Scoped to #mensaje so Fecha/Confirmar (which
+   use the shorter message-text--sm variant) are unaffected. */
+#mensaje .content--text { gap: 4.5cqw; }
+#mensaje .message-text { font-size: 4.7cqw; line-height: 1.35; }
+
 /* ---------- Menú ---------- */
 
-.content--menu { justify-content: flex-start; padding-top: 12cqw; gap: 6cqw; }
+.content--menu { justify-content: center; padding-top: 12cqw; gap: 6cqw; }
 .menu-title { margin-bottom: 2cqw; }
 .menu-list { display: flex; flex-direction: column; gap: 3.2cqw; align-items: center; width: 100%; }
 
@@ -359,7 +372,7 @@ html, body {
 /* ---------- Cuenta regresiva ---------- */
 
 .content--countdown {
-  justify-content: flex-start;
+  justify-content: center;
   padding-top: 10cqw;
   gap: 3cqw;
 }
@@ -372,7 +385,7 @@ html, body {
 
 /* ---------- Misa / Recepción ---------- */
 
-.content--info { justify-content: flex-start; padding-top: 8cqw; gap: 2.5cqw; }
+.content--info { justify-content: center; padding-top: 8cqw; gap: 2.5cqw; }
 .time-big { font-family: var(--script); font-size: 6cqw; color: var(--ink); margin: 0; }
 .venue-name { font-family: var(--script); font-size: 6cqw; color: var(--ink-soft); margin: 2cqw 0 0; }
 .venue-address { font-family: var(--script); font-size: 4.6cqw; color: var(--ink-soft); line-height: 1.4; margin: 0; }
@@ -425,7 +438,7 @@ html, body {
    on phones there's enough spare room that growing to fill it made the
    envelope dominate the screen over the message text. */
 .content--regalo {
-  justify-content: flex-start;
+  justify-content: center;
   gap: 2.5cqw;
   padding-top: 12cqw;
   /* extra padding-bottom reserves room for .home-btn (bottom:5cqw +
@@ -433,16 +446,29 @@ html, body {
   padding-bottom: 20cqw;
 }
 .gift-envelope {
-  width: 50cqw;
+  width: 42cqw;
   filter: drop-shadow(0 14px 24px rgba(0,0,0,.2));
 }
+/* Sized down from the shared accessibility sizes (8cqw / 6.2cqw) — at
+   those sizes, title+envelope+paragraphs together were taller than the
+   space between the frame and the flower corners, so the title crossed
+   the top border and the last line ran into the flowers. */
+#regalo .script-lg { font-size: 6.4cqw; }
+#regalo .message-text--sm { font-size: 5cqw; }
 
 /* ---------- Vestimenta ---------- */
 
-/* padding-top clears the dress/suit sketch in Traje.png (~14.6%-35.5% of
-   card height, i.e. ~21-50cqw once converted to the card's ratio). */
-.content--vestimenta { justify-content: flex-start; padding-top: 52cqw; gap: 2.5cqw; }
+/* padding-top clears the dress/suit sketch in Traje.png — reduced along
+   with .layer--traje's scale(0.85) above, since the icon now sits
+   higher/smaller. padding-bottom reserves room for .home-btn (bottom:
+   5cqw + height:12cqw) so centering never lands the swatches under it. */
+.content--vestimenta { justify-content: center; padding-top: 45cqw; padding-bottom: 20cqw; gap: 2cqw; }
 .formal-label { font-family: var(--script); font-size: 7cqw; color: var(--ink); margin: 0; }
+/* Smaller than the shared accessibility sizes, with tighter line-height,
+   so the swatches below land with real clearance above .home-btn. */
+#vestimenta .script-lg { font-size: 6.4cqw; }
+#vestimenta .formal-label { font-size: 6.5cqw; }
+#vestimenta .message-text--sm { font-size: 4.6cqw; line-height: 1.15; }
 .swatches { display: flex; gap: 3cqw; margin-top: 2cqw; }
 .swatch {
   width: 10cqw; height: 10cqw; min-width: 34px; min-height: 34px;
@@ -514,21 +540,9 @@ html, body {
   .modal h3 { font-size: 2rem; }
 }
 
-/* On phones the card is now taller than the 1240:1748 design height (it
-   fills the exact screen instead of the derived aspect-ratio box — see
-   the .invitation and .backdrop rules above), so screens that pinned
-   their content to the top (flex-start) leave a large empty gap above
-   the flowers. Centering distributes that extra room evenly instead.
-   Presentación/Vestimenta keep flex-start since their padding-top is
-   anchored to a fixed-position graphic (the XV logo / dress icon)
-   rather than to empty space. */
-@media (max-width: 640px) {
-  .content--menu,
-  .content--countdown,
-  .content--info {
-    justify-content: center;
-  }
-}
+/* All .content--* blocks now use justify-content: center as their base
+   value (see each screen's section above), so no mobile-only override
+   is needed here anymore. */
 
 /* Fondo.png is now the plain marble texture only — the border isn't part
    of any asset, it's drawn here. Always on: mobile crops the texture's
@@ -566,8 +580,6 @@ html, body {
 #fecha .script-lg,
 #misa .script-lg,
 #recepcion .script-lg,
-#regalo .script-lg,
-#vestimenta .script-lg,
 #confirmar .script-lg {
   font-size: 8cqw;
 }
@@ -579,8 +591,6 @@ html, body {
 }
 
 #fecha .message-text--sm,
-#regalo .message-text--sm,
-#vestimenta .message-text--sm,
 #confirmar .message-text--sm {
   font-size: 6.2cqw;
 }
@@ -601,5 +611,3 @@ html, body {
 #recepcion .pill--map {
   font-size: 6.5cqw;
 }
-
-#vestimenta .formal-label { font-size: 9cqw; }
