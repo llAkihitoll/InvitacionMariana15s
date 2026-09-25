@@ -47,6 +47,7 @@
       if (openEnvelopeBtn.classList.contains('opened')) return;
       const coverScreen = document.getElementById('cover');
       openEnvelopeBtn.classList.add('opened');
+      startBackgroundMusic();
       window.setTimeout(() => {
         coverScreen.classList.add('leaving');
         window.setTimeout(() => {
@@ -55,6 +56,70 @@
           openEnvelopeBtn.classList.remove('opened');
         }, 480);
       }, 1100);
+    });
+  }
+
+  // ---------- Background music ----------
+  // YouTube IFrame API, kept off-screen (see #yt-player in CSS/HTML) —
+  // only the floating note button is visible. Starts on the envelope
+  // click above (a real user gesture, which browsers require before
+  // allowing audio with sound), and loops continuously from there.
+  const YT_VIDEO_ID = 'ZkUQcn1DU5I';
+  const musicToggle = document.getElementById('musicToggle');
+  let ytPlayer = null;
+  let ytReady = false;
+  let musicRequested = false;
+  let musicMuted = false;
+
+  window.onYouTubeIframeAPIReady = function () {
+    ytPlayer = new window.YT.Player('yt-player', {
+      videoId: YT_VIDEO_ID,
+      playerVars: {
+        autoplay: 0,
+        controls: 0,
+        disablekb: 1,
+        loop: 1,
+        playlist: YT_VIDEO_ID, // required for loop:1 to work on a single video
+        playsinline: 1,
+        modestbranding: 1,
+        fs: 0,
+      },
+      events: {
+        onReady: () => {
+          ytReady = true;
+          if (musicRequested) ytPlayer.playVideo();
+        },
+      },
+    });
+  };
+
+  // Injected here (after window.onYouTubeIframeAPIReady is defined
+  // above) rather than as a static <script> tag in the HTML — the
+  // YouTube API only calls that callback if it's already defined by
+  // the time the API script finishes loading, and a static tag loading
+  // before app.js runs would miss it.
+  const ytScript = document.createElement('script');
+  ytScript.src = 'https://www.youtube.com/iframe_api';
+  document.head.appendChild(ytScript);
+
+  function startBackgroundMusic() {
+    if (musicRequested) return;
+    musicRequested = true;
+    if (musicToggle) musicToggle.hidden = false;
+    if (ytReady && ytPlayer) ytPlayer.playVideo();
+  }
+
+  if (musicToggle) {
+    musicToggle.addEventListener('click', () => {
+      if (!ytPlayer) return;
+      musicMuted = !musicMuted;
+      if (musicMuted) {
+        ytPlayer.mute();
+      } else {
+        ytPlayer.unMute();
+      }
+      musicToggle.classList.toggle('muted', musicMuted);
+      musicToggle.setAttribute('aria-label', musicMuted ? 'Activar música' : 'Silenciar música');
     });
   }
 
