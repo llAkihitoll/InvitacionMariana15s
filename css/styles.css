@@ -619,8 +619,7 @@ html, body {
 
 /* ---------- Background music ---------- */
 
-/* The actual YouTube iframe stays off-screen and inert; only this
-   floating toggle button is visible/interactive. */
+/* The YouTube iframe stays off-screen and inert — no visible controls. */
 #yt-player {
   position: fixed;
   width: 1px;
@@ -629,26 +628,3 @@ html, body {
   opacity: 0;
   pointer-events: none;
 }
-
-.music-toggle {
-  position: fixed;
-  right: 16px;
-  bottom: 16px;
-  z-index: 1000;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: none;
-  background: var(--ink-soft);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, .3);
-  transition: background .2s ease, transform .15s ease;
-}
-.music-toggle:hover { background: var(--ink); transform: translateY(-1px); }
-.music-toggle .icon-off { display: none; }
-.music-toggle.muted .icon-on { display: none; }
-.music-toggle.muted .icon-off { display: block; }

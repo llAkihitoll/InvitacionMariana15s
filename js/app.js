@@ -61,15 +61,13 @@
 
   // ---------- Background music ----------
   // YouTube IFrame API, kept off-screen (see #yt-player in CSS/HTML) —
-  // only the floating note button is visible. Starts on the envelope
-  // click above (a real user gesture, which browsers require before
-  // allowing audio with sound), and loops continuously from there.
+  // no visible controls. Starts on the envelope click above (a real
+  // user gesture, which browsers require before allowing audio with
+  // sound), and loops continuously from there.
   const YT_VIDEO_ID = 'ZkUQcn1DU5I';
-  const musicToggle = document.getElementById('musicToggle');
   let ytPlayer = null;
   let ytReady = false;
   let musicRequested = false;
-  let musicMuted = false;
 
   window.onYouTubeIframeAPIReady = function () {
     ytPlayer = new window.YT.Player('yt-player', {
@@ -105,22 +103,7 @@
   function startBackgroundMusic() {
     if (musicRequested) return;
     musicRequested = true;
-    if (musicToggle) musicToggle.hidden = false;
     if (ytReady && ytPlayer) ytPlayer.playVideo();
-  }
-
-  if (musicToggle) {
-    musicToggle.addEventListener('click', () => {
-      if (!ytPlayer) return;
-      musicMuted = !musicMuted;
-      if (musicMuted) {
-        ytPlayer.mute();
-      } else {
-        ytPlayer.unMute();
-      }
-      musicToggle.classList.toggle('muted', musicMuted);
-      musicToggle.setAttribute('aria-label', musicMuted ? 'Activar música' : 'Silenciar música');
-    });
   }
 
   // ---------- Countdown ----------
