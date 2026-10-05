@@ -393,6 +393,7 @@ html, body {
 .content--info { justify-content: center; padding-top: 8cqw; gap: 2.5cqw; }
 .time-big { font-family: var(--script); font-size: 6cqw; color: var(--ink); margin: 0; }
 .venue-name { font-family: var(--script); font-size: 6cqw; color: var(--ink-soft); margin: 2cqw 0 0; }
+.venue-hall { font-family: var(--script); font-size: 4.6cqw; color: var(--ink-soft); font-style: italic; margin: -0.5cqw 0 0; }
 .venue-address { font-family: var(--script); font-size: 4.6cqw; color: var(--ink-soft); line-height: 1.4; margin: 0; }
 .map-link { display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 2cqw; text-decoration: none; margin-top: 1cqw; }
 .pin-icon { color: var(--ink-soft); display: inline-flex; flex-shrink: 0; }
@@ -612,6 +613,11 @@ html, body {
 #recepcion .venue-address {
   font-size: 6cqw;
 }
+#recepcion .venue-hall { font-size: 6cqw; }
+/* The extra Salón line pushes the photo closer to .home-btn — trim the
+   gap and photo size a bit on this screen specifically to clear it. */
+#recepcion .content--info { gap: 1.8cqw; }
+#recepcion .photo-frame { width: 33cqw; margin-top: 1cqw; }
 #misa .pill--map,
 #recepcion .pill--map {
   font-size: 6.5cqw;
