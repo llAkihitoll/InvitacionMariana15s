@@ -317,17 +317,22 @@ html, body {
 /* Logo.png (XV, "Años" and "Mariana Claro") shares FondoInicio.png's
    1240:1748 canvas, so with the same object-fit: cover it scales and crops
    exactly like the photo. Its artwork is drawn at ~25-46% of the height;
-   the shift moves it down over the skirt (~61-83%), as in the reference
+   the shift moves it down over the skirt (~55-76%), as in the reference
    design. */
-.layer--logo { transform: translateY(36.6%); }
+.layer--logo { transform: translateY(29.9%); }
 
-/* "Siguiente" right under the logo's "Mariana Claro" (which ends at ~83%
-   of the photo), instead of on the bright grass at the very bottom. A %
-   of the card height keeps it in the same place on the photo on phones
-   and desktop alike. */
+/* In the reference design the corner flowers sit exactly where
+   EsquinasFlorales2.png draws them (~69-93%), framing "Mariana Claro",
+   so skip the generic nudge down used on the other screens. */
+#presentacion .layer--flowers { transform: none; }
+
+/* "Siguiente" right under the logo's "Mariana Claro" (which ends at ~76%
+   of the photo), in the gap between the two flower corners. A % of the
+   card height keeps it in the same place on the photo on phones and
+   desktop alike. */
 .content--presentacion .next-link {
   position: absolute;
-  top: 84.5%;
+  top: 79%;
   left: 50%;
   transform: translateX(-50%);
   font-size: 5.6cqw;
